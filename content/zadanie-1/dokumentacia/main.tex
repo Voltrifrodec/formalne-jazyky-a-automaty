@@ -1,0 +1,132 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+\input{settings.tex}
+
+\begin{document}
+
+    \begin{flushleft}
+        \begin{center}
+            \MakeUppercase[]{
+                \vspace{0.5cm}{
+                    \noindent\expandafter\footnotesize{Fakulta prírodných vied Univerzity Mateja Bela v Banskej Bystrici}
+                }
+            }
+            \thispagestyle{empty}
+            \MakeUppercase[]{
+                \noindent
+                \vfill
+                \vspace{10pt}{
+                    \noindent\expandafter\fontsize{30}{25}\textbf{Dokumentácia} \\
+                }
+                \vspace{30pt}
+            }
+            \MakeUppercase[]{
+                \noindent
+                \vspace{25pt}{
+                    \noindent\expandafter\fontsize{14}{15}\textbf{Akceptor pre konkrétny regulárny výraz} \\
+                }
+            }
+            {
+                \vspace{50pt}    
+                \noindent\\{15. novembra 2024}
+            }
+        \end{center}
+        \thispagestyle{empty}
+        \vfill
+        \noindent
+        \begin{tabular}{ll}
+            Jakub Kubaliak              \\
+            122nAIm, 1. ročník              \\
+            Formálne jazyky a automaty    \\
+        \end{tabular}
+    \end{flushleft}
+    \newpage
+
+    \chapterheader{Spustenie aplikácie}
+
+    \noindentfix Odkaz na Github repozitár: \textcolor{cyan!80}{\href{https://github.com/Voltrifrodec/formalne-jazyky-a-automaty}{https://github.com/Voltrifrodec/formalne-jazyky-a-automaty}}
+    
+    \noindentfix Vytvorenie .jar súboru a spustenie aplikácie (môže vyžadovať nainštalovaný \HighlightedTextLightgray{mvn}; spúšťame v priečinku \HighlightedTextLightgray{/aplikacia}):
+
+    \noindentfix \fcolorbox{black}{gray!30}{
+        \parbox{\linewidth}{
+            \texttt{mvn clean package}\linebreak\texttt{java -jar ./target/zadanie1-1.0.jar}
+        }
+    }
+
+    \noindentfix Manuálne zadanie vstupu:
+
+    \noindentfix \fcolorbox{black}{gray!30}{
+        \parbox{\linewidth}{
+            \texttt{java -jar ./target/zadanie1-1.0.jar}
+        }
+    }
+
+    \noindentfix Zadanie vstupu zo súboru:
+
+    \noindentfix \fcolorbox{black}{gray!30}{
+        \parbox{\linewidth}{
+            \texttt{java -jar ./target/zadanie1-1.0.jar test-retazcov.txt}
+        }
+    }
+
+    \noindentfix Spustenie testov:
+
+    \noindentfix \fcolorbox{black}{gray!30}{
+        \parbox{\linewidth}{
+            \texttt{mvn test}
+        }
+    }
+    \pagebreak
+
+    \chapterheader{Rozbor riešenia}
+
+    \noindentfix Môj regulárny výraz bol výraz \HighlightedTextLightgray{[a]b\{a|b\}}:
+    \begin{figure}[h]
+        \centering
+        \includegraphics{./assets/stavovy-diagram-pre-regularny-vyraz.png}
+        \caption{Stavový diagram pre regulárny výraz \HighlightedTextLightgray{(a)?b(a|b)*}.}
+        \label{fig:stavovy-diagram}
+    \end{figure}
+
+    \noindentfix Teda, na prvej pozícii sa vyskytuje 0 alebo 1 znakov \HighlightedTextLightgray{a}, nasleduje jeden znak \HighlightedTextLightgray{b} a potom sa vyskytuje 0 alebo viac znakov \HighlightedTextLightgray{a} alebo \HighlightedTextLightgray{b}.
+
+    \noindentfix Akceptovanými reťazcami môže byť napríklad:
+    \begin{itemize}
+        \setlength{\parskip}{0pt}
+        \setlength{\itemsep}{0pt}
+        \item \HighlightedTextLightgray{ab}
+        \item \HighlightedTextLightgray{abba}
+        \item \HighlightedTextLightgray{b}
+        \item \HighlightedTextLightgray{bba}
+    \end{itemize}
+
+    \noindentfix Naopak neakceptovanými reťazcami môžu byť:
+    \begin{itemize}
+        \setlength{\parskip}{0pt}
+        \setlength{\itemsep}{0pt}
+        \item \HighlightedTextLightgray{a}
+        \item \HighlightedTextLightgray{aabb}
+        \item \HighlightedTextLightgray{aa}
+        \item \HighlightedTextLightgray{aab}
+    \end{itemize}
+
+    \noindentfix Pri riešení zadania som sa rozhodol pre programovací jazyk Java a využiť nástroj Maven pre testovanie výrazov.
+
+    \noindentfix Ako prvú vec, ktorú som urobil, bolo vytvorenie nového Maven projektu. Najprv som vytvoril konfiguračný súbor \HighlightedTextLightgray{pom.xml}, do ktorého som nastavil základné parametre pre projekt (názov, verziu Javy a pod.) a následne inicializoval vytvorený projekt príkazom \HighlightedTextLightgray{mvn clean install}. Potom som pracoval na vytvorení algoritmu, príslušných unit testov a následne pridanie podpory pre vstup z konzoly a textového súboru.
+
+    \pagebreak
+    \subchapterheader{Algoritmus}
+
+    \noindentfix Zo zadania som vyčítal, že nemôžem použiť knižnice pre regulárne výrazy. Pre riešenie je možné využiť buď jeden cyklus \HighlightedTextLightgray{while}, počas ktorého budem odoberať zo vstupného reťazca znaky podľa stavu, alebo využiť rekurzívne funkcie a tým elimininovať potrebu cyklu. V riešení som sa rozhodol pre využitie cyklu \HighlightedTextLightgray{while}.
+
+    \noindentfix Reťazec som overoval po častiach. Najprv som overil či nie je reťazec prázdny. Následne som overil prvý stav $q_0$ (reťazec obsahuje 0 alebo 1 počet znakov \HighlightedTextLightgray{a}). Po overení stavu $q_0$ som začal overovať druhý stav, $q_1$ (musí obsahovať znak \HighlightedTextLightgray{b}). Ako posledné som pomocou cyklu overoval posledný stav $q_2$ (reťazec obsahuje 0 alebo 1 počet znakov \HighlightedTextLightgray{a} alebo \HighlightedTextLightgray{b}).
+
+    \noindentfix Nasledujúci zdrojový kód obsahuje hlavnú časť programu -- metódu obsahujúcu algoritmus pre akceptor. 
+
+    \begin{center}
+        \lstinputlisting[basicstyle=\scriptsize, language=java, caption={Ukážka vytvorenej metódy \HighlightedTextLightgray{compareToRegex}.}, label={lst:compare-to-regex}]{./assets/compare-to-regex.java}
+    \end{center}
+
+\end{document}
