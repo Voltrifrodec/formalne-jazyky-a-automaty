@@ -1,19 +1,30 @@
 package sk.umb.fpv.fja.zadanie_1;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Application {
 
 	public static void main(String[] args) {
+		System.out.println("\nregex: [a]b{a|b}\n");
+
+		// Podpora pre nacitanie vstupnych retazcov zo suboru.
+		if(args != null && args.length != 0 && args[0] != null) {
+			readFromFile(args[0]);
+		}
+
 		// Podpora pre nacitanie vstupneho retazca z konzoly.
 		if(args.length == 0) {
-			System.out.println("regex: [a]b{a|b}\n");
 			readFromConsole();
 		}
 	}
 
 	public static String compareToRegex(String input) {
-
 		// Kontrola, ci vstupny retazec nie je prazdny.
 		if(input.length() == 0)
 			return "N";
@@ -54,12 +65,10 @@ public class Application {
 		
 		// Ak je vsetko v poriadku, tak sa vrati vystup 'A'.
 		return "A";
-
 	}
 
 	// Metoda pre nacitanie a porovnanie znaku z konzoly pouzivatelom.
 	private static void readFromConsole() {
-
 		// Nacitanie vstupneho retazca z konzoly.
 		System.out.print("Zadajte vstupny retazec: ");
 		Scanner reader = new Scanner(System.in);
@@ -71,7 +80,26 @@ public class Application {
 		System.out.println(
 			String.format("\nVstup -> %s,  vystup: %s", input, compareToRegex(input))
 		);
-
 	}
 
+	// Metoda pre nacitanie a porovnanie vstupnych retazcov zo suboru.
+	private static void readFromFile(String fileName) {
+		try {
+			// Nacitanie vsetkych neprazdnych riadkov.
+			List<String> fileContent = Files.readAllLines(Paths.get(fileName));
+			fileContent = fileContent.stream()
+				.filter(s -> !s.isEmpty())
+				.map(s -> s.replace("\r", "").replace("\n", "")
+			).collect(Collectors.toList());
+
+			for (String s : fileContent) {
+				String value = compareToRegex(s);
+				System.out.println(s + "\t -> " + value);
+			}
+		}
+		catch (Exception e) {
+			// Ak sa nenasiel subor, tak sa vypise chyba
+			System.out.println("Nepodarilo sa nacitat retazce zo suboru.");
+		}
+	}
 }
