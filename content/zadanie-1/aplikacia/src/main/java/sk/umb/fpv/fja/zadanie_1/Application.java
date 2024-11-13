@@ -1,15 +1,15 @@
 package sk.umb.fpv.fja.zadanie_1;
 
+import java.util.Scanner;
+
 public class Application {
 
 	public static void main(String[] args) {
-		System.out.println("Hello world!");
-
 		// Podpora pre nacitanie vstupneho retazca z konzoly.
 		if(args.length == 0) {
-			
+			System.out.println("regex: [a]b{a|b}\n");
+			readFromConsole();
 		}
-
 	}
 
 	public static String compareToRegex(String input) {
@@ -54,6 +54,23 @@ public class Application {
 		
 		// Ak je vsetko v poriadku, tak sa vrati vystup 'A'.
 		return "A";
+
+	}
+
+	// Metoda pre nacitanie a porovnanie znaku z konzoly pouzivatelom.
+	private static void readFromConsole() {
+
+		// Nacitanie vstupneho retazca z konzoly.
+		System.out.print("Zadajte vstupny retazec: ");
+		Scanner reader = new Scanner(System.in);
+		String input = reader.next().trim(); // .trim() pre odstranenie whitespace znakov
+		
+		// Ukoncenie nacitavania znakov.
+		reader.close();
+
+		System.out.println(
+			String.format("\nVstup -> %s,  vystup: %s", input, compareToRegex(input))
+		);
 
 	}
 
