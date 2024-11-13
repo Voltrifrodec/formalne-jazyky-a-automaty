@@ -20,22 +20,12 @@ K vypracovanému programu je potrebné pripraviť stručnú dokumentáciu (*pdf*
 
 ## Dokumentácia
 
-Dokumentáciu je možné nájsť v súbore [<img src="/assets/pdf-icon.png" width=12> dokumentacia.pdf](#).
+Dokumentáciu je možné nájsť v súbore [<img src="/assets/pdf-icon.png" width=12> dokumentacia.pdf](dokumentacia.pdf).
 
-<!-- FIXME: V produkcii vymazať túto podkategóriu -->
-### Dokumentácia
+## Výsledný program
 
-Váš regulárny výraz, stručný rozbor riešenia, prípadne opis algoritmu a príklady.
+Celý program sa nachádza v súbore [<img src="/assets/java-icon.png" width=12> Application.java](aplikacia/src/main/java/sk/umb/fpv/fja/zadanie_1/Application.java).
 
-Pridať obrázok pre vytvorený stavový automat (vygenerovaný na TUKE stránke).
-
-### Výsledný algoritmus
-
-Celý program sa nachádza v súbore [<img src="/assets/java-icon.png" width=12> AcceptorForRegularExpression.java](#).
-
-```java
-(cely algoritmus pojde sem)
-``` 
 
 <!-- Reference: https://www.flaticon.com/free-icons/java -->
 <!-- Reference: https://www.flaticon.com/free-icons/pdf -->
