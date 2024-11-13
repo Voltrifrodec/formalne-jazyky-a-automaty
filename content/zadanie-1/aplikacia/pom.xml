@@ -16,7 +16,6 @@
 		<maven.compiler.source>21</maven.compiler.source>
 	</properties>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

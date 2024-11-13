@@ -1,2 +1,5 @@
 # LaTeX build files
 **/out/**
+
+# Maven build files
+**/target/**

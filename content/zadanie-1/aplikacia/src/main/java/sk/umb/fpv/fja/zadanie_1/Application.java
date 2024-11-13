@@ -1,9 +1,7 @@
 package sk.umb.fpv.fja.zadanie_1;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -26,10 +24,11 @@ public class Application {
 
 	public static String compareToRegex(String input) {
 		// Kontrola, ci vstupny retazec nie je prazdny.
-		if(input.length() == 0)
+		if(input.length() == 0) {
 			return "N";
+		}
 
-		// Kontrola prveho stavu: 	Ak retazec na zaciatku obsahuje znak 'a', tak musi
+		// Kontrola prveho stavu:	Ak retazec na zaciatku obsahuje znak 'a', tak musi
 		// 							dalsi znak musi byt 'b'. Inak nastava chyba. Ak obsahuje,
 		// 							tak odstrani skontrolovany znak. A skontroluje ci novy
 		// 							retazec nie je prazdny a ci na zaciatku je znak 'b'
@@ -40,12 +39,12 @@ public class Application {
 			if(!input.isEmpty() && input.charAt(0) != 'b') {
 				return "N";
 			}
-
 		}
-		if(input.isEmpty())
+		if(input.isEmpty()) {
 			return "N";
+		}
 
-		// Kontrola druheho stavu: 	Retazec musi obsahovat znak 'b' (bez ohladu na vysledok
+		// Kontrola druheho stavu:	Retazec musi obsahovat znak 'b' (bez ohladu na vysledok
 		// 							prveho stavu). Inak nastava chyba. Ak obsahuje, tak 
 		// 							odstrani skontrolovany znak.
 		if(input.charAt(0) != 'b') {
@@ -53,7 +52,7 @@ public class Application {
 		}
 		input = input.substring(1);
 
-		// Kontrola tretieho stavu: Retazec moze obsahovat 0 a viac znakov 'a' alebo 'b'. 
+		// Kontrola tretieho stavu:	Retazec moze obsahovat 0 a viac znakov 'a' alebo 'b'. 
 		// 							Ak obsahuje iny, nastava chyba. Ak nie, skrat vstupny
 		//							retazec o skontrolovany stav.
 		while(!input.isEmpty()) {
@@ -77,6 +76,7 @@ public class Application {
 		// Ukoncenie nacitavania znakov.
 		reader.close();
 
+		// Vypis vysledku
 		System.out.println(
 			String.format("\nVstup -> %s,  vystup: %s", input, compareToRegex(input))
 		);
