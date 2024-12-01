@@ -3,8 +3,8 @@ Repozitár pre vypracované zadania z predmetu *Formálne jazyky a automaty*.
 
 ## Vypracované zadania
 
-- [Zadanie 1: Akceptor pre konkrétny regulárny výraz](/content/zadanie-1/)
-- [Zadanie 2: Jednoduchý riadkovo orientovaný kalkulátor](#)
+- [Zadanie 1: Akceptor pre konkrétny regulárny výraz](/content/zadanie-1/README.md)
+- [Zadanie 2: Jednoduchý riadkovo orientovaný kalkulátor](/content/zadanie-2/README.md)
 
 <!--
 ## Spúšťanie programov
