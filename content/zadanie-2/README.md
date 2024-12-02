@@ -21,4 +21,4 @@ Dokumentáciu je možné nájsť v súbore [<img src="/assets/pdf-icon.png" widt
 
 ## Výsledný program
 
-Celý program sa nachádza v súbore [<img src="/assets/java-icon.png" width=12> Application.java](#).
+Celý program sa nachádza v priečinku [/aplikacia/src/main/java/sk/umb/fpv/fja/zadanie_2](aplikacia/src/main/java/sk/umb/fpv/fja/zadanie_2).
